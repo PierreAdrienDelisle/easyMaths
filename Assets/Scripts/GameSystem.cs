@@ -44,7 +44,7 @@ public class GameSystem : MonoBehaviour
         calculScript.randomCalcul();
         currentCalcul.text = calculScript.calculQuestion;
         resultField.text = "";
-        timer = PlayerPrefs.GetFloat("timer", 10.0f);
+        timer = PlayerPrefs.GetFloat("timer", 60.0f);
     }
 
     // Update is called once per frame
@@ -57,9 +57,7 @@ public class GameSystem : MonoBehaviour
             //get var
             calculElements.SetActive(false);
             calculResults.SetActive(true);
-            Debug.Log(scoreResult.text);
             scoreResult.text = "Score: " + scoreUpdate.score.ToString();
-            Debug.Log(scoreResult.text);
             nbCorrectResult.text = nbCorrect.ToString();
             nbWrongResult.text = nbWrong.ToString();
         }

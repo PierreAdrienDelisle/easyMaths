@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuScript : MonoBehaviour
-{
 
+public class loadScene : MonoBehaviour
+{
     public void calculScene()
     {
         SceneManager.LoadScene("CalculScene");
     }
-
-    public void QuitGame()
+    public void menuScene()
     {
-        Debug.Log("QUIT!");
-        Application.Quit();
+        SceneManager.LoadScene("MenuScene");
     }
-
 }

@@ -45,26 +45,68 @@ public class NewCalcul : MonoBehaviour
 
     public void randomCalcul()
     {
-        Operator = (string)activeOp[Random.Range(0, activeOp.Count-1)];
+        Operator = (string)activeOp[Random.Range(0, activeOp.Count)];
         if (difficulty == 1)
         {
-            firstOp = Random.Range(0, 9);
-            secondOp = Random.Range(0, 9);
+            firstOp = easyDiff();
+            secondOp = easyDiff();
         }
         else if(difficulty == 2)
         {
-            firstOp = Random.Range(0, 20);
-            secondOp = Random.Range(0, 20);
+            firstOp = moderateDiff();
+            secondOp = moderateDiff();
+            
         }
         else
         {
             firstOp = Random.Range(0, 100);
             secondOp = Random.Range(0, 100);
         }
+
+        if(firstOp < secondOp && (Operator == "/" || Operator == "-"))
+        {
+            int temp = secondOp;
+            secondOp = firstOp;
+            firstOp = temp;
+        }
+
         calculQuestion = firstOp.ToString() + Operator + secondOp.ToString();
         calculText.text = calculQuestion;
-
+        if ((Operator == "/") && secondOp == 0)
+        {
+            randomCalcul();
+        }
         ExpressionEvaluator.Evaluate<int>(calculText.text,out resultExpected);
+    }
+
+    private int easyDiff()
+    {
+        float rand = Random.value;
+        if (rand <= .5f){
+            return Random.Range(0, 5);
+        }else if (rand <= .8f){
+            return Random.Range(5, 8);
+        }
+        return Random.Range(8, 10);
+        
+    }
+
+    private int moderateDiff()
+    {
+        float rand = Random.value;
+        if (rand <= .3f)
+        {
+            return Random.Range(0, 5);
+        }
+        else if (rand <= .5f)
+        {
+            return Random.Range(5, 8);
+        }else if (rand <= .8f)
+        {
+            return Random.Range(8, 10);
+        }
+        return Random.Range(10, 15);
+
     }
     // Update is called once per frame
     void Update()

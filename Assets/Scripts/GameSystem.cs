@@ -25,7 +25,7 @@ public class GameSystem : MonoBehaviour
     public int nbWrong;
     private bool displayingResult;
 
-    public float timer;
+    private float timer;
     public GameObject calculResults;
     public GameObject calculElements;
 
@@ -35,6 +35,12 @@ public class GameSystem : MonoBehaviour
     public TMP_Text nbWrongResult;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        timer = PlayerPrefs.GetInt("timer", 60);
+        timer -= Time.deltaTime;
+        timerText.text = (timer).ToString("0");
+    }
     void Start()
     {
         nbCorrect = 0;
@@ -44,7 +50,7 @@ public class GameSystem : MonoBehaviour
         calculScript.randomCalcul();
         currentCalcul.text = calculScript.calculQuestion;
         resultField.text = "";
-        timer = PlayerPrefs.GetFloat("timer", 60.0f);
+        
     }
 
     // Update is called once per frame

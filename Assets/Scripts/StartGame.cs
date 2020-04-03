@@ -12,7 +12,7 @@ public class StartGame : MonoBehaviour
 
     public GameObject calculSystem;
     public GameObject calculDigits;
-    private GameSystem gameScript;
+    private GameSystemCalcul gameScript;
     private Button[] digitButtons;
 
     public TMP_Text startText;
@@ -20,11 +20,10 @@ public class StartGame : MonoBehaviour
 
     private void Start()
     {
-        gameScript = calculSystem.GetComponent<GameSystem>();
+        gameScript = calculSystem.GetComponent<GameSystemCalcul>();
         digitButtons = calculDigits.GetComponentsInChildren<Button>();
         foreach (Button digitButton in digitButtons)
         {
-            Debug.Log(digitButton + ": false");
             digitButton.enabled = false;
         }
         gameScript.enabled = false;
@@ -40,7 +39,6 @@ public class StartGame : MonoBehaviour
             digitButtons = calculDigits.GetComponentsInChildren<Button>();
             foreach (Button digitButton in digitButtons)
             {
-                Debug.Log(digitButton + ": false");
                 digitButton.enabled = true;
             }
             resultInput.SetActive(true);

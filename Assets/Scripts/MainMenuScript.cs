@@ -11,6 +11,11 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene("CalculScene");
     }
 
+    public void tableScene()
+    {
+        SceneManager.LoadScene("TableScene");
+    }
+
     public void QuitGame()
     {
         Debug.Log("QUIT!");

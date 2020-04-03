@@ -9,7 +9,6 @@ public class ToggleButton : MonoBehaviour
     public bool ButtonOn = false;
     public Button MyButton;
     public string prefParam;
-    public int defaultParam;
 
     public void Awake()
     {
@@ -52,18 +51,7 @@ public class ToggleButton : MonoBehaviour
         MyButton.image.color = Color.white;
     }
 
-    void OnMouseOver()
-    {
-        Color newColor = new Color(0.7f, 0.7f, 0.7f, 1f);
-        MyButton.image.color = newColor;
-        Debug.Log("Mouse is OVER GameObject.");
-    }
 
-    void OnMouseExit()
-    {
-        //The mouse is no longer hovering over the GameObject so output this message each frame
-        Debug.Log("Mouse is no longer on GameObject.");
-    }
 
 
 }

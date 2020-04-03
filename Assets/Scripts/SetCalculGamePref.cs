@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetGamePref : MonoBehaviour
+public class SetCalculGamePref : MonoBehaviour
 {
     public void setDifficulty(int difficulty)
     {

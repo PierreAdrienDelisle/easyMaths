@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ButtonPressedPrefs : MonoBehaviour
+public class MenuCalculButtonPrefs : MonoBehaviour
 {
     public Button level1;
     public Button level2;

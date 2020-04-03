@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class GameSystem : MonoBehaviour
+public class GameSystemCalcul : MonoBehaviour
 {
     public TMP_Text currentCalcul;
     public TMP_InputField resultField;
@@ -148,7 +148,6 @@ public class GameSystem : MonoBehaviour
     {
         foreach (Button digitButton in digitButtons)
         {
-            Debug.Log(digitButton + ": false");
             digitButton.enabled = false;
         }
     }
@@ -157,7 +156,6 @@ public class GameSystem : MonoBehaviour
     {
         foreach (Button digitButton in digitButtons)
         {
-            Debug.Log(digitButton + ": false");
             digitButton.enabled = true;
         }
     }

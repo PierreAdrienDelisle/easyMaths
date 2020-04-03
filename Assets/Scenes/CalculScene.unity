@@ -487,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCalcul: {fileID: 710084806}
   resultField: {fileID: 681308930}
+  gamemode: calcul
   calculGameObj: {fileID: 710084804}
   scoreGameObj: {fileID: 120260805}
   wrongImage: {fileID: 509224644}

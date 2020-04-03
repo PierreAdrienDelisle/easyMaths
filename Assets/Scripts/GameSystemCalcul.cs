@@ -9,8 +9,13 @@ public class GameSystemCalcul : MonoBehaviour
     public TMP_Text currentCalcul;
     public TMP_InputField resultField;
 
+    public string gamemode;
     public GameObject calculGameObj;
     private NewCalcul calculScript;
+    private NewTableCalcul calculTableScript;
+    private string resExpected;
+
+
     public GameObject scoreGameObj;
     private ScoreUpdate scoreUpdate;
 
@@ -52,9 +57,19 @@ public class GameSystemCalcul : MonoBehaviour
         nbCorrect = 0;
         nbWrong = 0;
         scoreUpdate = scoreGameObj.GetComponent<ScoreUpdate>();
-        calculScript = calculGameObj.GetComponent<NewCalcul>();
-        calculScript.randomCalcul();
-        currentCalcul.text = calculScript.calculQuestion;
+        if (gamemode == "calcul")
+        {
+            calculScript = calculGameObj.GetComponent<NewCalcul>();
+            calculScript.randomCalcul();
+            currentCalcul.text = calculScript.calculQuestion;
+        }
+        else if (gamemode == "table")
+        {
+            calculTableScript = calculGameObj.GetComponent<NewTableCalcul>();
+            calculTableScript.randomCalcul();
+            currentCalcul.text = calculTableScript.calculQuestion;
+        }
+
         resultField.text = "";
         digitButtons = calculDigits.GetComponentsInChildren<Button>();
 
@@ -76,9 +91,17 @@ public class GameSystemCalcul : MonoBehaviour
         }
         if (!displayingResult)
         {
-            if (calculScript.resultExpected.ToString().Contains(resultField.text)) // result match
+            if(gamemode == "calcul")
             {
-                if (resultField.text == calculScript.resultExpected.ToString())
+                resExpected = calculScript.resultExpected.ToString();
+            }else if(gamemode == "table")
+            {
+                resExpected = calculTableScript.resultExpected.ToString();
+            }
+
+            if (resExpected.Contains(resultField.text)) // result match
+            {
+                if (resultField.text == resExpected)
                 {
                     displayingResult = true;
                     //trigger correct event
@@ -114,11 +137,19 @@ public class GameSystemCalcul : MonoBehaviour
         StartCoroutine(answerDisplay(1, wrongImage));
         WrongAudio.Play();
         freezeInput();
-        resultField.text = resultField.text + "=> "+ calculScript.resultExpected.ToString();
+        resultField.text = resultField.text + "=> "+ resExpected;
         yield return new WaitForSeconds(1.5f);
         resultField.text = "";
-        calculScript.randomCalcul();
-        currentCalcul.text = calculScript.calculQuestion;
+        if(gamemode == "calcul")
+        {
+            calculScript.randomCalcul();
+            currentCalcul.text = calculScript.calculQuestion;
+        }
+        else if(gamemode == "table")
+        {
+            calculTableScript.randomCalcul();
+            currentCalcul.text = calculTableScript.calculQuestion;
+        }
         resultField.text = "";
         enableInput();
         scoreUpdate.wrongAnswer();
@@ -134,8 +165,16 @@ public class GameSystemCalcul : MonoBehaviour
         CorrectAudio.Play();
         freezeInput();
         yield return new WaitForSeconds(0.5f);
-        calculScript.randomCalcul();
-        currentCalcul.text = calculScript.calculQuestion;
+        if (gamemode == "calcul")
+        {
+            calculScript.randomCalcul();
+            currentCalcul.text = calculScript.calculQuestion;
+        }
+        else if (gamemode == "table")
+        {
+            calculTableScript.randomCalcul();
+            currentCalcul.text = calculTableScript.calculQuestion;
+        }
         resultField.text = "";
         enableInput();
         scoreUpdate.correctAnswer();
@@ -159,4 +198,5 @@ public class GameSystemCalcul : MonoBehaviour
             digitButton.enabled = true;
         }
     }
+
 }

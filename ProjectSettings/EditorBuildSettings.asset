@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CalculScene.unity
     guid: 0ef615d33dcf00948be57ba84bb44a23
+  - enabled: 1
+    path: Assets/Scenes/TableScene.unity
+    guid: c59ed5132b2576340aa35783023d09c2
   m_configObjects: {}

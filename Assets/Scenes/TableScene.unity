@@ -5298,8 +5298,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -127}
-  m_SizeDelta: {x: 1148.2, y: 489.1}
+  m_AnchoredPosition: {x: -499, y: -126}
+  m_SizeDelta: {x: 1141.6, y: 485.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1943615223
 MonoBehaviour:
@@ -5319,7 +5319,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fb98fbf0373c7a44683a74bb92151c2d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00063122fabeba64ba75b530ee567cfb, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5372,8 +5372,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 189}
-  m_SizeDelta: {x: 596.2, y: 151.9}
+  m_AnchoredPosition: {x: 26.3, y: 190.6}
+  m_SizeDelta: {x: 787, y: 151.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1944877532
 MonoBehaviour:
@@ -5384,7 +5384,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1944877530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 991647746f264f4469648724bfd9ad21, type: 3}
+  m_Script: {fileID: 11500000, guid: eacb1f36e5688b04b8efcf2579692137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   calculText: {fileID: 1944877533}
@@ -5392,8 +5392,8 @@ MonoBehaviour:
   difficulty: 0
   firstOp: 0
   secondOp: 0
-  Operator: 
-  activeOp: []
+  Number: 
+  activeNumber: 
   resultExpected: 0
   calculQuestion: 
 --- !u!114 &1944877533
@@ -5416,16 +5416,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: ' 2 + 2 = ?'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7e256eddf7cda54d9ee9bd48d856685, type: 2}
-  m_sharedMaterial: {fileID: -144913720634147792, guid: e7e256eddf7cda54d9ee9bd48d856685,
+  m_fontAsset: {fileID: 11400000, guid: 9414cf56163d01345bb6ee13657e2ccb, type: 2}
+  m_sharedMaterial: {fileID: -1435640706544807657, guid: 9414cf56163d01345bb6ee13657e2ccb,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5436,15 +5436,15 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
-  m_overrideHtmlColors: 0
+  m_overrideHtmlColors: 1
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 130
-  m_fontSizeBase: 130
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5460,7 +5460,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -5584,6 +5584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCalcul: {fileID: 1944877533}
   resultField: {fileID: 134693245}
+  gamemode: table
   calculGameObj: {fileID: 1944877530}
   scoreGameObj: {fileID: 1232902150}
   wrongImage: {fileID: 1065190098}

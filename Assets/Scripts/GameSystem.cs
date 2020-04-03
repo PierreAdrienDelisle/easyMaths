@@ -107,7 +107,7 @@ public class GameSystem : MonoBehaviour
         StartCoroutine(answerDisplay(1, wrongImage));
         WrongAudio.Play();
         resultField.text = resultField.text + "=> "+ calculScript.resultExpected.ToString();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         resultField.text = "";
         calculScript.randomCalcul();
         currentCalcul.text = calculScript.calculQuestion;

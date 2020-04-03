@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor;
+using NCalc;
+using System;
 
 public class NewCalcul : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class NewCalcul : MonoBehaviour
     public List<string> activeOp;
     public int resultExpected;
     public string calculQuestion;
+    private Expression exp;
 
     // Start is called before the first frame update
     void Awake()
@@ -45,7 +47,7 @@ public class NewCalcul : MonoBehaviour
 
     public void randomCalcul()
     {
-        Operator = (string)activeOp[Random.Range(0, activeOp.Count)];
+        Operator = (string)activeOp[UnityEngine.Random.Range(0, activeOp.Count)];
         if (difficulty == 1)
         {
             firstOp = easyDiff();
@@ -59,11 +61,11 @@ public class NewCalcul : MonoBehaviour
         }
         else
         {
-            firstOp = Random.Range(0, 100);
-            secondOp = Random.Range(0, 100);
+            firstOp = hardDiff();
+            secondOp = hardDiff();
         }
 
-        if(firstOp < secondOp && (Operator == "/" || Operator == "-"))
+        if(firstOp < secondOp && (Operator == "/" || Operator == "-")) // Change order to avoid negative values or 0 divide values
         {
             int temp = secondOp;
             secondOp = firstOp;
@@ -71,46 +73,83 @@ public class NewCalcul : MonoBehaviour
         }
 
         calculQuestion = firstOp.ToString() + Operator + secondOp.ToString();
-        calculText.text = calculQuestion;
-        if ((Operator == "/") && secondOp == 0)
+        if ((Operator == "/") && secondOp == 0) // not divide by zero
+        {
+            Debug.Log("NEW random calcul");
+            randomCalcul();
+            return;
+        }
+
+        try // random errors due to runtime evaluation expression
+        {
+            Debug.Log("EXP");
+            Expression e = new Expression(calculQuestion);
+            if (Operator == "/") // convert double to int
+            {
+                resultExpected = Convert.ToInt32(Math.Floor((double)e.Evaluate()));
+            }
+            else
+            {
+                Debug.Log(calculQuestion);
+                Debug.Log(e.Evaluate());
+                resultExpected = (int)e.Evaluate();
+            }
+        }
+        catch
         {
             randomCalcul();
+            return;
         }
-        ExpressionEvaluator.Evaluate<int>(calculText.text,out resultExpected);
+
+        if (Operator == "*") // Change display for * to x
+        {
+            calculQuestion = firstOp.ToString() + "x" + secondOp.ToString();
+        }
+
+        calculText.text = calculQuestion;
     }
 
     private int easyDiff()
     {
-        float rand = Random.value;
-        if (rand <= .5f){
-            return Random.Range(0, 5);
-        }else if (rand <= .8f){
-            return Random.Range(5, 8);
+        float rand = UnityEngine.Random.value;
+        if (rand <= .1f){
+            return 0;
         }
-        return Random.Range(8, 10);
-        
+        return UnityEngine.Random.Range(1, 6);
+
     }
 
     private int moderateDiff()
     {
-        float rand = Random.value;
+        float rand = UnityEngine.Random.value;
+        if (rand <= .5f)
+        {
+            return UnityEngine.Random.Range(0, 5);
+        }
+        else if (rand <= .8f)
+        {
+            return UnityEngine.Random.Range(5, 8);
+        }
+        return UnityEngine.Random.Range(8, 10);
+
+    }
+
+    private int hardDiff()
+    {
+        float rand = UnityEngine.Random.value;
         if (rand <= .3f)
         {
-            return Random.Range(0, 5);
+            return UnityEngine.Random.Range(0, 5);
         }
         else if (rand <= .5f)
         {
-            return Random.Range(5, 8);
+            return UnityEngine.Random.Range(5, 8);
         }else if (rand <= .8f)
         {
-            return Random.Range(8, 10);
+            return UnityEngine.Random.Range(8, 10);
         }
-        return Random.Range(10, 15);
+        return UnityEngine.Random.Range(10, 20);
 
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

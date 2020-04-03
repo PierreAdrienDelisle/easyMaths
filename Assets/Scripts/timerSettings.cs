@@ -16,14 +16,16 @@ public class timerSettings : MonoBehaviour
                 return 0;
             case 60:
                 return 1;
-            case 180:
+            case 90:
                 return 2;
-            case 300:
+            case 180:
                 return 3;
-            case 600:
+            case 300:
                 return 4;
-            case 900:
+            case 600:
                 return 5;
+            case 900:
+                return 6;
         }
         return 0;
     }
@@ -37,12 +39,14 @@ public class timerSettings : MonoBehaviour
             case 1:
                 return 60;
             case 2:
-                return 180;
+                return 90;
             case 3:
-                return 300;
+                return 180;
             case 4:
-                return 600;
+                return 300;
             case 5:
+                return 600;
+            case 6:
                 return 900;
         }
         return 0;

@@ -503,6 +503,7 @@ MonoBehaviour:
   scoreResult: {fileID: 2145750741}
   nbCorrectResult: {fileID: 195262397}
   nbWrongResult: {fileID: 1147891925}
+  calculDigits: {fileID: 2073841648}
 --- !u!114 &124562110
 MonoBehaviour:
   m_ObjectHideFlags: 0

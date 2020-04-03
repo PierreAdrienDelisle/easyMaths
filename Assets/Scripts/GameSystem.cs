@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameSystem : MonoBehaviour
 {
@@ -34,12 +35,17 @@ public class GameSystem : MonoBehaviour
     public TMP_Text nbCorrectResult;
     public TMP_Text nbWrongResult;
 
+    public GameObject calculDigits;
+    private Button[] digitButtons;
+
+
     // Start is called before the first frame update
     private void Awake()
     {
         timer = PlayerPrefs.GetInt("timer", 60);
         timer -= Time.deltaTime;
         timerText.text = (timer).ToString("0");
+        
     }
     void Start()
     {
@@ -50,7 +56,8 @@ public class GameSystem : MonoBehaviour
         calculScript.randomCalcul();
         currentCalcul.text = calculScript.calculQuestion;
         resultField.text = "";
-        
+        digitButtons = calculDigits.GetComponentsInChildren<Button>();
+
     }
 
     // Update is called once per frame
@@ -106,12 +113,14 @@ public class GameSystem : MonoBehaviour
     {
         StartCoroutine(answerDisplay(1, wrongImage));
         WrongAudio.Play();
+        freezeInput();
         resultField.text = resultField.text + "=> "+ calculScript.resultExpected.ToString();
         yield return new WaitForSeconds(1.5f);
         resultField.text = "";
         calculScript.randomCalcul();
         currentCalcul.text = calculScript.calculQuestion;
         resultField.text = "";
+        enableInput();
         scoreUpdate.wrongAnswer();
         nbWrong += 1;
         nbWrongText.text = nbWrong.ToString();
@@ -123,14 +132,33 @@ public class GameSystem : MonoBehaviour
     {
         StartCoroutine(answerDisplay(1, correctImage));
         CorrectAudio.Play();
-        resultField.text = resultField.text;
+        freezeInput();
         yield return new WaitForSeconds(0.5f);
         calculScript.randomCalcul();
         currentCalcul.text = calculScript.calculQuestion;
         resultField.text = "";
+        enableInput();
         scoreUpdate.correctAnswer();
         nbCorrect += 1;
         nbCorrectText.text = nbCorrect.ToString();
         displayingResult = false;
+    }
+
+    private void freezeInput()
+    {
+        foreach (Button digitButton in digitButtons)
+        {
+            Debug.Log(digitButton + ": false");
+            digitButton.enabled = false;
+        }
+    }
+
+    private void enableInput()
+    {
+        foreach (Button digitButton in digitButtons)
+        {
+            Debug.Log(digitButton + ": false");
+            digitButton.enabled = true;
+        }
     }
 }

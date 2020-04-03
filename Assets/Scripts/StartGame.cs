@@ -13,7 +13,7 @@ public class StartGame : MonoBehaviour
     public GameObject calculSystem;
     public GameObject calculDigits;
     private GameSystem gameScript;
-    private DigitScript[] digitsScripts;
+    private Button[] digitButtons;
 
     public TMP_Text startText;
     public GameObject resultInput;
@@ -21,10 +21,11 @@ public class StartGame : MonoBehaviour
     private void Start()
     {
         gameScript = calculSystem.GetComponent<GameSystem>();
-        digitsScripts = calculDigits.GetComponentsInChildren<DigitScript>();
-        foreach (DigitScript digitScript in digitsScripts)
+        digitButtons = calculDigits.GetComponentsInChildren<Button>();
+        foreach (Button digitButton in digitButtons)
         {
-            digitScript.enabled = false;
+            Debug.Log(digitButton + ": false");
+            digitButton.enabled = false;
         }
         gameScript.enabled = false;
         resultInput.SetActive(false);
@@ -36,13 +37,15 @@ public class StartGame : MonoBehaviour
         startText.text = (timeLeft).ToString("0");
         if (timeLeft < 0){
             gameScript.enabled = true;
-            digitsScripts = calculDigits.GetComponentsInChildren<DigitScript>();
-            foreach (DigitScript digitScript in digitsScripts)
+            digitButtons = calculDigits.GetComponentsInChildren<Button>();
+            foreach (Button digitButton in digitButtons)
             {
-                digitScript.enabled = false;
+                Debug.Log(digitButton + ": false");
+                digitButton.enabled = true;
             }
             resultInput.SetActive(true);
             startText.gameObject.SetActive(false);
+            this.enabled = false;
         }
     }
 

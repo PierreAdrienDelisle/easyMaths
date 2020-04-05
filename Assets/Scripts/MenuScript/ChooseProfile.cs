@@ -6,10 +6,14 @@ using TMPro;
 public class ChooseProfile : MonoBehaviour
 {
     public TMP_Dropdown profileDrop;
+    public GameObject profileMenu;
+    public GameObject GameModeMenu;
+    public TMP_Text errorMessage;
 
     void dropDownUpdate()
     {
         ExistingProfiles existProfiles = ProfileManagement.LoadAllProfiles();
+        profileDrop.options.Clear();
         if (existProfiles != null)
         {
             List<string> profileNames = new List<string>();
@@ -31,9 +35,32 @@ public class ChooseProfile : MonoBehaviour
 
     public void selectProfile()
     {
+        try
+        {
+            string name = profileDrop.options[profileDrop.value].text;
+            CurrentProfile currentProfile = GameObject.Find("CurrentProfile").GetComponent<CurrentProfile>();
+            currentProfile.profile = ProfileManagement.LoadProfile(name);
+            profileMenu.SetActive(false);
+            GameModeMenu.SetActive(true);
+        }
+        catch
+        {
+            StartCoroutine(EmptyName(5.0f));
+        }
+    }
+
+    public void deleteProfile()
+    {
         string name = profileDrop.options[profileDrop.value].text;
         CurrentProfile currentProfile = GameObject.Find("CurrentProfile").GetComponent<CurrentProfile>();
-        currentProfile.profile = ProfileManagement.LoadProfile(name);
+        ProfileManagement.RemoveProfile(name);
+        dropDownUpdate();
+    }
 
+    IEnumerator EmptyName(float time)
+    {
+        errorMessage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(time);
+        errorMessage.gameObject.SetActive(false);
     }
 }

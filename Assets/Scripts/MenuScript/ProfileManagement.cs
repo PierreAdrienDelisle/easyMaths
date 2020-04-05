@@ -107,6 +107,63 @@ public class ProfileManagement : MonoBehaviour
         }
         return existProfiles;
     }
+
+
+    static public void UpdateProfile(string name, int calculBestScore, int tableBestScore)
+    {
+        // open existing profiles
+        ExistingProfiles existProfiles = new ExistingProfiles();
+        if (File.Exists(pathProfile))
+        {
+            string jsonFile = System.IO.File.ReadAllText(pathProfile);
+            existProfiles = JsonUtility.FromJson<ExistingProfiles>(jsonFile);
+        }
+        else
+        {
+            File.Create(pathProfile).Close();
+            existProfiles = new ExistingProfiles();
+            existProfiles.lastID = 0;
+            existProfiles.profiles = new List<ProfileData>();
+        }
+
+        foreach (ProfileData profileData in existProfiles.profiles) // find matching profile
+        {
+            if (profileData.name == name)
+            {
+                profileData.name = name;
+                profileData.calculBestScore = calculBestScore;
+                profileData.tableBestScore = tableBestScore;
+            }
+        }
+ 
+        string json = JsonUtility.ToJson(existProfiles);
+        File.WriteAllText(pathProfile, json);
+        existProfiles = JsonUtility.FromJson<ExistingProfiles>(json);
+    }
+
+
+    static public void RemoveProfile(string name)
+    {
+        // open existing profiles
+        ExistingProfiles existProfiles = new ExistingProfiles();
+        if (File.Exists(pathProfile))
+        {
+            string jsonFile = System.IO.File.ReadAllText(pathProfile);
+            existProfiles = JsonUtility.FromJson<ExistingProfiles>(jsonFile);
+            ProfileData profileToRemove = null;
+            foreach (ProfileData profileData in existProfiles.profiles) // find matching profile
+            {
+                if (profileData.name == name)
+                {
+                    profileToRemove = profileData;
+                }
+            }
+            existProfiles.profiles.Remove(profileToRemove);
+            string json = JsonUtility.ToJson(existProfiles);
+            File.WriteAllText(pathProfile, json);
+            existProfiles = JsonUtility.FromJson<ExistingProfiles>(json);
+        }
+    }
 }
 
 [Serializable]

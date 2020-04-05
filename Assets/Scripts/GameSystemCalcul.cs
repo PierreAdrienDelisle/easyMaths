@@ -43,6 +43,7 @@ public class GameSystemCalcul : MonoBehaviour
     public GameObject calculDigits;
     private Button[] digitButtons;
 
+    public NewRecord newRecordScript;
 
     // Start is called before the first frame update
     private void Awake()
@@ -80,7 +81,7 @@ public class GameSystemCalcul : MonoBehaviour
     {
         timer -= Time.deltaTime;
         timerText.text = (timer).ToString("0");
-        if(timer < 0)
+        if (timer < 0)
         {
             //get var
             calculElements.SetActive(false);
@@ -88,6 +89,15 @@ public class GameSystemCalcul : MonoBehaviour
             scoreResult.text = "Score: " + scoreUpdate.score.ToString();
             nbCorrectResult.text = nbCorrect.ToString();
             nbWrongResult.text = nbWrong.ToString();
+            if (gamemode == "calcul")
+            {
+                newRecordScript.isCalculRecord(scoreUpdate.score);
+
+            }
+            else if (gamemode == "table")
+            {
+                newRecordScript.isTableRecord(scoreUpdate.score);
+            }
         }
         if (!displayingResult)
         {
